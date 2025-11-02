@@ -1,0 +1,19 @@
+{
+  "name": "corpo-emp-dep-sink-connector",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "tasks.max": "1",
+    "topic.prefix": "corpo_",
+    "connection.url": "jdbc:mariadb://127.0.0.1:3306/corpo",
+    "connection.user": "root",
+    "connection.password": "password",
+    "auto.create": "false",
+    "table.whitelist": "employee_department",
+    "pk.mode": "record_key",
+    "pk.fields": "employee_id,department_id",
+    "poll.interval.ms": 5000,
+    "mode": "timestamp",
+    "timestamp.column.name": "updated_at"
+  }
+}
+
