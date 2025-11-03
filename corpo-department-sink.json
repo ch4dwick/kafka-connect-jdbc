@@ -1,5 +1,5 @@
 {
-  "name": "corpo-emp-dep-sink-connector",
+  "name": "corpo-department-sink-connector",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "value.converter": "org.apache.kafka.connect.json.JsonConverter",
@@ -18,11 +18,10 @@
     "connection.password": "password",
     "timestamp.column.name": "updated_at",
     "topics": "corpo_department_sink",
-    "table.name.format": "employee_department",
+    "table.name.format": "department",
     "pk.mode": "none",
     "delete.enabled": false,
     "insert.mode": "insert",
     "dialect.name": "MySqlDatabaseDialect"
   }
 }
-

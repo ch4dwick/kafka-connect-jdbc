@@ -48,11 +48,38 @@ KAFKA_FOLDER/bin/connect-distributed.sh connect-mariadb-distributed.properties
 ## Register Connectors
 
 ```sh
-curl -X POST -H "Content-Type: application/json" --data @corpo-sink.json http://localhost:8083/connectors
+curl -X POST -H "Content-Type: application/json" --data @corpo-source.json http://localhost:8083/connectors
 
-curl -X POST -H "Content-Type: application/json" --data @corpo-emp-dep-lookup-sink.json http://localhost:8083/connectors
+curl -X POST -H "Content-Type: application/json" --data @corpo-emp-dep-lookup-source.json http://localhost:8083/connectors
 ```
 
-Reference:
+## Notes
+
+As a source, **"value.converter.schemas.enable": "false"** ensures that the topic is only populated with JSON objects.
+
+As a sink, **"value.converter.schemas.enable": "true"** is required by design to work, and the JSON payload must have a schema.
+
+Sample sink payload:
+
+```json
+{
+  "schema": {
+    "type": "struct",
+    "fields": [
+      {
+        "field": "department_name",
+        "type": "string"
+      }
+    ],
+    "optional": false,
+    "name": "department"
+  },
+  "payload": {
+    "department_name": "Black Budget"
+  }
+}
+```
+
+## Reference:
 - Confluent Kafka Source Connector https://docs.confluent.io/kafka-connectors/jdbc/current/source-connector/overview.html
 - Docker Compose https://github.com/apache/kafka/blob/trunk/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml

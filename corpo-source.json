@@ -1,7 +1,11 @@
 {
-  "name": "corpo-sink-connector",
+  "name": "corpo-source-connector",
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
     "tasks.max": "1",
     "topic.prefix": "corpo_",
     "connection.url": "jdbc:mariadb://127.0.0.1:3306/corpo",
